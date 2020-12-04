@@ -71,3 +71,49 @@ describe demo.new_employee;
 create table if not exists demo.copy_employee 
 like demo.employee;
 
+#External queries
+
+hdfs dfs -mkdir /HiveDirectory
+
+
+CREATE EXTERNAL TABLE world_population (
+    > world_rank INT,
+    > country STRING,
+    > population BIGINT,
+    > world DOUBLE,
+    > extra_data STRING )
+    > ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+    > STORED AS TEXTFILE
+    > LOCATION '/HiveDirectory';
+
+#load data into hdfs by using below command:
+
+load data local inpath "/home/cheluvesha/Documents/worldpopulation.csv" into table world_population;
+
+#insert data into table
+
+insert into world_population values (197,'test c1',900,0.01,'xyz');
+
+
+Select * from world_population;
+
+
+select population from world_population where country = 'India';
+
+
+#Alter
+
+ALTER TABLE name RENAME TO new_name
+ALTER TABLE name ADD COLUMNS (col_spec[, col_spec ...])
+ALTER TABLE name DROP [COLUMN] column_name
+ALTER TABLE name CHANGE column_name new_name new_type
+ALTER TABLE name REPLACE COLUMNS (col_spec[, col_spec ...])
+
+
+ALTER table world_population RENAME to WorldPopulation;
+
+#DROP
+
+DROP TABLE IF EXISTS employee;
+
+
