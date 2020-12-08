@@ -2,7 +2,7 @@
 
 echo "Script is running"
 
-hive -f /home/cheluvesha/Documents/hive/userlogView1.hql  
+hive -f /home/cheluvesha/Documents/hive/userlogView.hql  
 
 hive -e "select * from fellowship.userlog_avg_hour;" > userlog.txt
 
